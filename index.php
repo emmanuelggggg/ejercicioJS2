@@ -13,7 +13,7 @@
         }
     </style>
     <canvas id=mycanvas width="500px;" height="500px;">
-
+        
     </canvas>
 
     <script>
@@ -27,6 +27,13 @@
         var speed =3;
         var pausa= false;
         var obstaculos = new Array(3);
+
+        var avion = new Image();
+        var torre = new Image();
+
+        var audio1 = new Audio();
+
+        
         function start(){
 
              cv  =document.getElementById('mycanvas');
@@ -39,6 +46,10 @@
             obstaculos[0]= new Cuadraro(100,50,120,30);
             obstaculos[1]= new Cuadraro(50,300,30,120);
             obstaculos[2]= new Cuadraro(400,200,30,120);
+
+            avion.src = 'avionXD.png';
+            torre.src = 'to.png';
+            audio1.src = "explosion.mp3"
             
              paint();
         }
@@ -78,10 +89,14 @@
             ctx.fillRect(0,0,500,500);
             
             player.c=rbgaRand();
-            player.dibujar(ctx);
+            // player.dibujar(ctx);
+            ctx.drawImage(avion,player.x,player.y,50,50);
 
-            player2.dibujar(ctx);
 
+            // player2.dibujar(ctx);
+            ctx.drawImage(torre,player2.x,player2.y,50,50);
+
+            
             ctx.fillStyle='black';
             ctx.font ="15px Arial"
             ctx.fillText("Score :"+score+"  Speed :"+speed,20,20)
@@ -137,7 +152,22 @@
                 
                 if(player.se_tocan(obstaculos[0]) || player.se_tocan(obstaculos[1]) 
                     || player.se_tocan(obstaculos[2])){
-                    speed =0.1;
+                        if(direction == 'right'){
+                            player.x -=speed
+                           
+                        }
+                        if(direction == 'left'){
+                            player.x +=speed;
+                           
+                        }
+                        if(direction == 'down'){
+                            player.y -=speed;
+                           
+                        }
+                        if(direction == 'up'){
+                            player.y +=speed;
+                            
+                        }
                     
                 }else{
                     if(player.se_tocan(player2)){
@@ -147,6 +177,8 @@
     
                         score += 5;
                         speed +=0.3;
+
+                        audio1.play();
     
                     }
                 }
@@ -197,6 +229,7 @@
         function generateRandomIntegerInRange( max) {
             return Math.floor(Math.random() * (max  + 1));
         }
+
 </script>
 </body>
 </html>
