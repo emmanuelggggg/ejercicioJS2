@@ -7,7 +7,29 @@
     <title>Document</title>
 </head>
 <body>
-    <style>
+    
+
+    
+    <script src="https://unpkg.com/vue@3"></script>
+
+        <div id="app">
+        <h1>hola {{ message }}</h1>
+        </div>
+
+        <script>
+        const { createApp } = Vue
+
+        createApp({
+            data() {
+            return {
+                message: 'jesus Emmanuel'
+            }
+            }
+        }).mount('#app')
+    </script>
+</body>
+</html>
+    <!-- <style>
         canvas {
             background-color: #eee;
         }
@@ -230,6 +252,6 @@
             return Math.floor(Math.random() * (max  + 1));
         }
 
-</script>
+</script> -->
 </body>
 </html>
